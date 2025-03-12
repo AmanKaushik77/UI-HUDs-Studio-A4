@@ -25,7 +25,24 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         // The game starts with the settings menu disabled
         DisableSettingsMenu();
     }
+    public void DisableSettingsMenu()
+    {
+        Time.timeScale = 1f;
+        settingsMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isSettingsMenuActive = false;
+    }
 
+
+    public void QuitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
     public void IncreaseScore()
     {
         score++;
@@ -47,24 +64,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         isSettingsMenuActive = true;
-    }
-
-    public void DisableSettingsMenu()
-    {
-        Time.timeScale = 1f;
-        settingsMenu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        isSettingsMenuActive = false;
-    }
-
-    public void QuitGame()
-    {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
     }
 
 }

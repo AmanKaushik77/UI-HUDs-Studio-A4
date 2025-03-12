@@ -30,7 +30,8 @@ public class InputManager : MonoBehaviour
         {
             OnSettingsMenu?.Invoke();
         }
-
+        if (GameManager.Instance.IsSettingsMenuActive) return;
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             OnJump?.Invoke();
